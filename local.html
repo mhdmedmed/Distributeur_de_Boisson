@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alimi Store</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f5f5;
+    direction: rtl;
+}
+
+header {
+    background: #0d6efd;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.price {
+    color: green;
+    font-weight: bold;
+}
+
+button {
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.cart {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    border-top: 2px solid #ddd;
+    padding: 10px;
+}
+
+.cart span {
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Alimi Store</h1>
+    <p>أفضل السلع بأفضل الأسعار</p>
+</header>
+
+<div class="products" id="products"></div>
+
+<div class="cart">
+    🛒 السلة: <span id="total">0</span> دج
+</div>
+
+<script>
+const products = [
+    {name:"ساعة ذكية", price:4500, img:"https://via.placeholder.com/300"},
+    {name:"سماعات بلوتوث", price:3200, img:"https://via.placeholder.com/300"},
+    {name:"شاحن سريع", price:1800, img:"https://via.placeholder.com/300"},
+    {name:"حافظة هاتف", price:900, img:"https://via.placeholder.com/300"}
+];
+
+let total = 0;
+const container = document.getElementById("products");
+
+products.forEach(p => {
+    container.innerHTML += `
+        <div class="card">
+            <img src="${p.img}">
+            <h4>${p.name}</h4>
+            <p class="price">${p.price} دج</p>
+            <button onclick="addToCart(${p.price})">أضف للسلة</button>
+        </div>
+    `;
+});
+
+function addToCart(price){
+    total += price;
+    document.getElementById("total").innerText = total;
+}
+</script>
+
+</body>
+</html>
